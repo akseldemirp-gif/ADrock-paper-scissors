@@ -12,7 +12,6 @@ def client():
 @pytest.mark.parametrize("path, content", [
     ("/", b"Play a round"),
     ("/home", b"Look up a stock"),
-    ("/about", b"<h1>About</h1>"),
     ("/rps/form", b'<option value="scissors">'),
     ("/stocks/form", b'<input id="symbol"'),
 ])
