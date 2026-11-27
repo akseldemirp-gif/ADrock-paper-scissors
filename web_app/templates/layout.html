@@ -16,7 +16,7 @@
         <span class="brand-icon" aria-hidden="true">↗</span> Rock, Paper, Scissors, Stock!
       </a>
       <ul class="navbar-nav flex-row flex-wrap">
-        {% for endpoint, label in [('home.index', 'Home'), ('rps.form', 'RPS Game'), ('stocks.stock_form', 'Stocks'), ('home.about', 'About')] %}
+        {% for endpoint, label in [('home.index', 'Home'), ('rps.form', 'RPS Game'), ('stocks.stock_form', 'Stocks')] %}
           {% set active = request.endpoint == endpoint or (endpoint == 'rps.form' and request.blueprint == 'rps') or (endpoint == 'stocks.stock_form' and request.blueprint == 'stocks') %}
           <li class="nav-item"><a class="nav-link{% if active %} active{% endif %}" href="{{ url_for(endpoint) }}"{% if active %} aria-current="page"{% endif %}>{{ label }}</a></li>
         {% endfor %}

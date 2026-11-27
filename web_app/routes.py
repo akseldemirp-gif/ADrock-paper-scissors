@@ -18,11 +18,6 @@ def index():
     return render_template("home.html")
 
 
-@home.get("/about")
-def about():
-    return render_template("about.html")
-
-
 @home.get("/health")
 def health():
     return {"status": "ok"}
