@@ -1,65 +1,28 @@
-# Aksel's Rock Paper Scissors
+# Play & Price
 
-A command-line Python game where you play rock, paper, scissors against the computer. Includes automated tests and a reusable winner-determination function.
+A Flask web app for playing Rock Paper Scissors and charting stock prices. The web pages and command-line programs share the same game rules and stock-report code.
 
-## Prerequisites
+## Run locally
 
-- Anaconda or Miniconda
-- Git
-
-## Setup
-
-Clone the repository and navigate into it:
+Requires Python 3.11 or later.
 
 ```bash
-git clone https://github.com/akseldemirp-gif/ADrock-paper-scissors.git
-cd ADrock-paper-scissors
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m flask --app web_app run
 ```
 
-Create the virtual environment (first time only):
+Open [localhost:5000](http://localhost:5000). The game is at `/rps/form` and the stock lookup is at `/stocks/form`. For the command-line versions, run `python -m app.rps` or `python -m app.stocks`.
 
-```bash
-conda create -n rps-env python=3.11
-```
+## Stock data
 
-Activate the environment whenever you work on this project:
+The default lookup uses monthly prices from the [Vega Datasets stocks sample](https://vega.github.io/vega-datasets/datasets/stocks/). It supports AAPL, AMZN, GOOG, IBM, and MSFT with data from 2000–2010. The chart and table show up to 30 observations.
 
-```bash
-conda activate rps-env
-```
+To look up current daily history and other tickers, copy `.env.example` to `.env` and set `ALPHAVANTAGE_API_KEY` with an [Alpha Vantage API key](https://www.alphavantage.co/support/#api-key). The dashboard then uses Alpha Vantage daily closing prices. On Render, set the same variable in the service's Environment page.
 
-Install the required packages:
+## Tests and deployment
 
-```bash
-pip install -r requirements.txt
-```
+Run `python -m pytest` from the repository root. GitHub Actions runs tests for pushes and pull requests to `main`. The tests use local stock data and mocked provider responses, so they require no API key.
 
-## Run the Game
-
-From the repository's root directory, with the environment active:
-
-```bash
-python -m app.rps
-```
-
-Enter `rock`, `paper`, or `scissors` when prompted. The computer randomly chooses an option, and the game displays the result.
-
-Rock beats scissors, scissors beats paper, and paper beats rock. Matching choices produce a tie. Invalid choices display an error message; run the program again to retry.
-
-## Run Tests
-
-From the repository's root directory, with the environment active:
-
-```bash
-pytest
-```
-
-The tests import `determine_winner` from the application code and check all nine possible matchups across three test functions: ties, user wins, and computer wins.
-
-## Project Structure
-
-- `app/rps.py`: Game logic and command-line interaction.
-- `app/__init__.py`: Marks the app directory as a Python package.
-- `test/rps_test.py`: Automated tests for the winner logic.
-- `conftest.py`: Supports test imports with the project's test setup.
-- `requirements.txt`: Required third-party packages.
+See [DEPLOYING.md](DEPLOYING.md) for the Render setup.
