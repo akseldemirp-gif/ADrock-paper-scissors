@@ -1,4 +1,4 @@
-# Play & Price
+# Rock, Paper, Scissors, Stock!
 
 A Flask web app for playing Rock Paper Scissors and charting stock prices. The web pages and command-line programs share the same game rules and stock-report code.
 
